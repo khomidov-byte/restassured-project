@@ -1,22 +1,24 @@
 package com.cydeo.day2;
 
+
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.get;
+import static io.restassured.RestAssured.*;
 
 public class TestOneSpartan2 {
 
-    //  GET http://34.229.82.244:8000/api/spartans/1
+    //  GET http://54.236.150.168:8000/api/spartans/1
 
     // We can breakdown above url to 3 part to tell RestAssured to append at the end of our endpoints
 
     /**
-     * BaseURI  : http://34.229.82.244:8000
+     * BaseURI  : http://54.236.150.168:8000
      * BasePath : /api
      * Anything comes after actual resources
      *
@@ -24,9 +26,18 @@ public class TestOneSpartan2 {
      */
     @BeforeAll
     public static void setup(){
-
-        RestAssured.baseURI = "http://34.229.82.244:8000" ;
+        RestAssured.baseURI = "http://54.236.150.168:8000" ;
         RestAssured.basePath = "/api";
+    }
+
+    @AfterAll
+    public static void teardown(){
+        // in order to avoid the static value accidentally carried over
+        // to different class when we practice different api ,
+        // it's better if we set baseURI basePath back to it's original value using reset method
+        //RestAssured.reset();
+        reset();  //
+
     }
 
     // add a new test to check GET api/hello  Endpoint
